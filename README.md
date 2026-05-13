@@ -34,6 +34,11 @@ Can high-injury crashes be classified using traffic-unit involvement and enriche
 
 - `nsw_crash_traffic_volume_analysis_ready.csv`
   This CSV is used by `RQ4_Assignment4_Classification_Analysis.ipynb`.
+  
+  The analysis-ready dataset is provided as a zipped CSV in the `data/` folder. Before running the classification notebook, unzip:
+  `data/nsw_crash_traffic_volume_analysis_ready.csv.zip`
+  to obtain:
+  `data/nsw_crash_traffic_volume_analysis_ready.csv`
 
 ## Data Sources
 

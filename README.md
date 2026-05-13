@@ -32,6 +32,9 @@ Can high-injury crashes be classified using traffic-unit involvement and enriche
 - `rq4_traffic_volume_summary.csv`  
   High-injury rate by traffic-volume band.
 
+- `nsw_crash_traffic_volume_analysis_ready.csv`
+  This CSV is used by `RQ4_Assignment4_Classification_Analysis.ipynb`.
+
 ## Data Sources
 
 The analysis uses the following datasets:

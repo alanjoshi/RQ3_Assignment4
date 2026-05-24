@@ -1,0 +1,26 @@
+feature,importance
+num__log_all_vehicles_all_days,0.10559883421653223
+num__Speed_limit_num,0.07352526850479506
+num__Month_num,0.05769780716528116
+num__Day_num,0.04334523873387799
+cat__Natural lighting_Darkness,0.04084192864216322
+cat__Natural lighting_Daylight,0.03896055265137659
+num__No. of traffic units involved,0.03852762987979752
+num__heavy_vehicle_share_all_days,0.037254344239528364
+num__Is_dark,0.033669660157775075
+cat__Weather_Fine,0.03361050689918718
+cat__traffic_units_group_2 units,0.03129197788419075
+num__is_intersection,0.0297716586219548
+cat__Type of location_2-way undivided,0.029364622214558295
+cat__traffic_units_group_1 unit,0.028269598936249384
+num__is_late_night,0.025216982461224557
+num__Is_wet,0.021960313032913077
+cat__Urbanisation_Sydney metro. area,0.017623701998815994
+num__is_peak_time,0.015585357193207099
+num__is_high_speed,0.01448609392066837
+cat__Type of location_T-junction,0.013929104514875692
+cat__Weather_Raining,0.013400415418954762
+cat__Urbanisation_Country urban,0.013391701608855739
+cat__matched_station_road_hierarchy_Primary Road,0.012191621697727126
+cat__matched_station_road_hierarchy_Arterial Road,0.012079946779549855
+num__Is_weekend,0.011373547616629754

@@ -1,45 +1,40 @@
-# RQ4 Assignment 4 - NSW Road Crash Classification
+# RQ3 Assignment 4 - NSW Road Crash Severity Classification
 
-This repository contains the code and output files for Research Question 4 of the PRT564 Group Project.
+This repository contains the code, dataset access information, and output files for Research Question 3 of the PRT564 Group Project.
 
 ## Research Question
 
-Can high-injury crashes be classified using traffic-unit involvement and enriched traffic-volume variables?
+Can crash severity be anticipated using variables like time interval, location type, and the number of traffic units involved?
 
-## Files
+## Project Overview
 
-- `Build_NSW_Crash_Traffic_Enriched_Dataset.ipynb`  
-  Builds the enriched dataset by combining the preprocessed NSW crash dataset with Transport for NSW traffic-volume data.
+This project uses NSW road crash data enriched with Transport for NSW traffic-volume data to classify crash severity. The classification target is `casualty_crash`, where fatal and injury crashes are grouped as casualty crashes, and non-casualty towaway crashes are grouped as non-casualty crashes.
 
-- `RQ4_Assignment4_Classification_Analysis.ipynb`  
-  Performs exploratory data analysis, creates the classification target, trains baseline and enriched models, evaluates performance, and exports result tables.
+The analysis compares three classification models:
 
-- `rq4_model_test_results.csv`  
-  Final model performance on the test set.
+- Naive Bayes
+- Decision Tree
+- Random Forest
 
-- `rq4_cross_validation_results.csv`  
-  Five-fold cross-validation results.
+The Random Forest model was also tuned using grid search cross-validation.
 
-- `rq4_feature_importance.csv`  
-  Feature importance from the tuned enriched decision tree.
+## Repository Structure
 
-- `rq4_target_distribution.csv`  
-  Distribution of low/no injury and high-injury crashes.
 
-- `rq4_traffic_units_summary.csv`  
-  High-injury rate by number of traffic units involved.
+notebooks/
+  Build_NSW_Crash_Traffic_Enriched_Dataset.ipynb
+  RQ3_Assignment4_Crash_Severity_Classification.ipynb
 
-- `rq4_traffic_volume_summary.csv`  
-  High-injury rate by traffic-volume band.
-
-- `nsw_crash_traffic_volume_analysis_ready.csv`
-  This CSV is used by `RQ4_Assignment4_Classification_Analysis.ipynb`.
-  
-  The analysis-ready dataset is provided as a zipped CSV in the `data/` folder. Before running the classification notebook, unzip:
-  `data/nsw_crash_traffic_volume_analysis_ready.csv.zip`
-  to obtain:
-  `data/nsw_crash_traffic_volume_analysis_ready.csv`
-
+outputs/
+  rq3_model_test_results.csv
+  rq3_cross_validation_results.csv
+  rq3_final_model_results.csv
+  rq3_feature_importance.csv
+  rq3_target_distribution.csv
+  rq3_degree_of_crash_distribution.csv
+  rq3_location_type_summary.csv
+  rq3_time_interval_summary.csv
+  rq3_traffic_units_summary.csv
 ## Data Sources
 
 The analysis uses the following datasets:
@@ -60,20 +55,60 @@ Large source datasets are not included in this repository. They should be downlo
 The main analysis-ready dataset is too large to store directly in this repository. It can be accessed from the OneDrive link below:
 https://charlesdarwinuni-my.sharepoint.com/:x:/g/personal/s395095_students_cdu_edu_au/IQBBPjWFk4B8T5W7ljgkeLsMAXdCmR8LXHZxljYQyi5IKuM?e=aoSTbA
 This dataset was created by combining the preprocessed NSW crash dataset with Transport for NSW traffic volume datasets.
+## Dataset Preparation
 
-## Methods
+The enriched dataset was created by joining the preprocessed NSW crash dataset with traffic-volume station reference data and yearly traffic summary data.
 
-The classification target was defined as:
+The added traffic-volume variables include:
 
-- `0`: low/no injury crash, where `Total_casualties` is 0 or 1
-- `1`: high-injury crash, where `Total_casualties` is 2 or more
+- matched traffic station details
+- traffic volume counts
+- heavy vehicle volume
+- heavy vehicle share
+- road hierarchy
+- road classification
+- lane count
+- traffic match quality
 
-Models used:
+## Classification Target
 
-- Logistic Regression
+The classification target used in this project is `casualty_crash`.
+
+The target was created from the `Degree of crash` column:
+
+- `0`: Non-casualty towaway crash
+- `1`: Casualty crash, including fatal and injury crashes
+
+This binary target was used because fatal crashes were much less common than injury and non-casualty crashes.
+
+## Feature Engineering
+
+The notebook creates several engineered features for modelling:
+
+- `is_peak_time`
+- `is_late_night`
+- `is_intersection`
+- `is_high_speed`
+- `traffic_units_group`
+- `log_all_vehicles_all_days`
+- `heavy_vehicle_share_available`
+
+These features were created to better represent the time interval, location type, traffic-unit involvement, speed environment, and traffic-volume context.
+
+## Models Used
+
+The following classification models were developed and compared:
+
+- Naive Bayes
 - Decision Tree Classifier
+- Random Forest Classifier
+- Tuned Random Forest Classifier
 
-Model evaluation used:
+The Random Forest model was tuned using `GridSearchCV`.
+
+## Model Evaluation
+
+The models were evaluated using:
 
 - Accuracy
 - Precision
@@ -81,8 +116,39 @@ Model evaluation used:
 - F1-score
 - ROC-AUC
 - Confusion matrix
+- ROC curve
 - Five-fold cross-validation
 
-## Main Finding
+## Main Findings
 
-The number of traffic units involved was the strongest predictor of high-injury crashes. Traffic-volume enrichment added useful contextual information, with `all_vehicles_all_days` appearing among the important predictors, but it did not substantially improve overall predictive performance compared with the baseline model.
+Naive Bayes achieved the strongest recall and F1-score, making it useful for identifying casualty crashes. Tuned Random Forest achieved the highest ROC-AUC and provided feature importance results.
+
+The most important predictors included:
+
+- traffic volume
+- speed limit
+- month
+- day
+- natural lighting
+- number of traffic units involved
+- heavy vehicle share
+
+Overall, the results show that crash severity can be partly anticipated using time interval, location type, number of traffic units involved, and enriched traffic-volume variables. However, the model performance was moderate, suggesting that additional variables such as driver behaviour, actual speed, alcohol or drug involvement, seatbelt use, and vehicle condition may improve future prediction.
+
+## Output Files
+
+The `outputs/` folder contains the generated result files:
+
+- `rq3_model_test_results.csv`
+- `rq3_cross_validation_results.csv`
+- `rq3_final_model_results.csv`
+- `rq3_feature_importance.csv`
+- `rq3_target_distribution.csv`
+- `rq3_degree_of_crash_distribution.csv`
+- `rq3_location_type_summary.csv`
+- `rq3_time_interval_summary.csv`
+- `rq3_traffic_units_summary.csv`
+
+## Notes
+
+Large source datasets are not stored directly in this repository. The analysis-ready dataset is provided through the OneDrive link above.

@@ -57,7 +57,9 @@ The analysis uses the following datasets:
    Source: https://opendata.transport.nsw.gov.au/dataset/nsw-roads-traffic-volume-counts-api
 
 Large source datasets are not included in this repository. They should be downloaded separately from the links above.
-
+The main analysis-ready dataset is too large to store directly in this repository. It can be accessed from the OneDrive link below:
+https://charlesdarwinuni-my.sharepoint.com/:x:/g/personal/s395095_students_cdu_edu_au/IQBBPjWFk4B8T5W7ljgkeLsMAXdCmR8LXHZxljYQyi5IKuM?e=aoSTbA
+This dataset was created by combining the preprocessed NSW crash dataset with Transport for NSW traffic volume datasets.
 
 ## Methods
 
